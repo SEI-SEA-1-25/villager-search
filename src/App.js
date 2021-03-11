@@ -5,53 +5,39 @@ import DisplayCards from './DisplayCards'
 export default class App extends Component {
 
   state = {
-    names: [],
-    searchValue: '',
-    vilager: ''
+    villagers: [],
+    search: '',
   }
 
-  findVillager = () => {
-    return this.state.names.filter((villager) => villager.name['name-USen']
+  dynamicSearch = () => {
+    return this.state.villagers.filter((villager) => villager.name['name-USen']
     .toLowerCase()
-    .includes(this.state.searchValue.toLowerCase())
+    .includes(this.state.search.toLowerCase())
     )
   }
-
-  handleChange = (e) => {
-    this.setState({
-      searchValue: e.target.value
-    })
-  }
-
+  
   componentDidMount() {
     fetch("http://acnhapi.com/v1/villagers/")
     .then((response) => response.json())
     .then((data) => {
-      const animalObjectArray = Object.values(data);
-      console.log(animalObjectArray);
+      const villagers = Object.values(data);
       this.setState({
-        names: animalObjectArray
+        villagers: villagers
       })
     });
   }
 
-  render() {
-    const villagerNames = this.state.names.map((villager, index) => {
-      return <li key={`${index}`}>{villager.name['name-USen']}</li>
+  handleChange = (e) => {
+    this.setState({
+      search: e.target.value
     })
+  }
+  
+  render() {
     return (
       <div>
-        <h1>Hello World!</h1>
-          <input
-            type="text"
-            placeholder="Find a villager!"
-            onChange={this.handleChange}
-            value={this.state.searchValue}
-          />
-          <DisplayCards />
-        <ul>
-          {villagerNames}
-        </ul>
+        <input type='text' onChange={this.handleChange} />
+        <DisplayCards villagers={this.dynamicSearch()} />
       </div>
     )
   }
