@@ -32,7 +32,9 @@ export default class App extends Component {
   //     });
   // }
   villagerSearch() {
-    return this.state.villagerData.filter()
+    return this.state.villagerData.filter((villager) => {
+     return villager.name['name-USen'].toLowerCase().includes(this.state.search.toLowerCase())
+    })
   }
   handleChange = (e) => {
     this.setState({
