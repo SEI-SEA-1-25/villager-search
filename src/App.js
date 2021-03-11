@@ -13,9 +13,13 @@ export default class App extends Component {
 
 handleSearch () {
   const results = this.state.villagers.filter(result =>
-    result.includes(this.state.textValue)
+  result.name["name-USen"].toLowerCase().includes(this.state.textValue.toLowerCase())
   )
-  console.log(results)
+  
+  this.setState({
+    userSearch: results
+  })
+ 
 }
 
 handleSubmit = (e) => {
@@ -52,7 +56,10 @@ handleChange = (e) => {
          />
           <input type="submit" value="Find My Villager"/>
         </form>
-        <DisplayCards villagers={this.state.villagers}/>
+        <DisplayCards 
+        villagers={this.state.villagers}
+        userSearch={this.state.userSearch}
+        />
 
       </div>
     )

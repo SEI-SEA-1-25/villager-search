@@ -31,13 +31,22 @@ export default class DisplayCards extends Component {
         return (
             <div>
               
+                {this.props.userSearch.map((item, i) => (
+                  <div key={i}>
+                  <h1>{item.name["name-USen"]}</h1>
+                  <img src={item["image_uri"]} alt="No Image available"/>
+                  </div>
+                  ))}
+            
+            
+                 
 
-                {this.props.villagers.map((villager, i) => (
-                    <div key={i}>
-                    <img alt={villager.name["name-USen"]} src={villager["image_uri"]} />
-                    <p>{villager.name["name-USen"]}</p>
-                    </div>
-                ))}
+                  {/* {this.props.villagers.map((villager, i) => (
+                //     <div key={i}>
+                //     <img alt={villager.name["name-USen"]} src={villager["image_uri"]} />
+                //     <p>{villager.name["name-USen"]}</p>
+                //     </div>
+                // ))}  */}
 
             </div>
         )
