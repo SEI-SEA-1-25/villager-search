@@ -6,8 +6,8 @@ class DisplayCards extends Component {
             <div>
                 {this.props.villagers.map((villager, i) => (
                     <div key={i}>
-                        <img alt={villager.name["name-USen"]} src={villager["image_uri"]} />
                         <p>{villager.name["name-USen"]}</p>
+                        <img alt={villager.name["name-USen"]} src={villager["image_uri"]} />
                     </div>
                 ))}
             </div>
