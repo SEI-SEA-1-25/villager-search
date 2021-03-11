@@ -42,19 +42,20 @@ export default class App extends Component {
     })
     // console.log(e.target.value)
   }
-  handleSubmit = (e) => {
-    e.preventDefault()
-    this.setState((prevState) => {
-      return {
-        villagerData: [...prevState.villagerData, {villager: this.state.search}]
-      }
-    }, () => this.setState({search: ''}))
-    this.villagerSearch()
-  }
+  // handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   this.setState((prevState) => {
+  //     return {
+  //       villagerData: [...prevState.villagerData, {villager: this.state.search}]
+  //     }
+  //   }, () => this.setState({search: ''}))
+  //   this.villagerSearch()
+  // }
   render () {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        {/* to make this work, maybe take the form and submit out? */}
+        {/* <form onSubmit={this.handleSubmit}>
           <input 
             type="text" 
             placeholder="search by name"
@@ -63,8 +64,14 @@ export default class App extends Component {
           />
           <input type="submit"/>
 
-        </form>
-        <DisplayCards villagerData={this.state.villagerData}/>
+        </form> */}
+        <input 
+            type="text" 
+            placeholder="search by name"
+            onChange={this.handleChange}
+            value={this.state.search}
+          />
+        <DisplayCards villagerData={this.villagerSearch()}/>
       </div>
     )
   }
