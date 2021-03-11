@@ -31,15 +31,23 @@ export default class App extends Component {
   //       console.log(iGuessThisIsAnArrayOfObjectsNowHuh);
   //     });
   // }
-  villagerSearch()
+  villagerSearch() {
+    return this.state.villagerData.filter()
+  }
   handleChange = (e) => {
     this.setState({
       search: e.target.value
     })
+    // console.log(e.target.value)
   }
   handleSubmit = (e) => {
     e.preventDefault()
-
+    this.setState((prevState) => {
+      return {
+        villagerData: [...prevState.villagerData, {villager: this.state.search}]
+      }
+    }, () => this.setState({search: ''}))
+    this.villagerSearch()
   }
   render () {
     return (
