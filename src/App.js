@@ -20,9 +20,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.state.villagers.map((villager) => (
-          <p>{villager.name['name-USen']}</p>
-        ))}
+        <DisplayCards villagers={this.state.villagers}/>
       </div>
     )
   }
