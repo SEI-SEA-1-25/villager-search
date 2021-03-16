@@ -1,27 +1,30 @@
-import {Component} from 'react'
-import DisplayCards from './components/DisplayCards.jsx'
+import { Component } from 'react'
+import DisplayCards from './components/DisplayCards'
 
-export default class App extends Component{
+
+export default class App extends Component {
+
   state = {
     villagers: [],
-    search: ''
+    search: '',
   }
-  // componentDidMount() {
-  //   fetch('http://acnhapi.com/v1/villagers/')
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     this.setState({ villagers: Object.values(data) })
-  //   })
-  // }
 
-  async componentDidMount() {
-    const response = await fetch(`http://acnhapi.com/v1/villagers/`)
-    const data = await response.json()
-    console.log(data)
-    const villagers = Object.values(data)
-    this.setState({
-      villagers
-    })
+  dynamicSearch = () => {
+    return this.state.villagers.filter((villager) => villager.name['name-USen']
+    .toLowerCase()
+    .includes(this.state.search.toLowerCase())
+    )
+  }
+  
+  componentDidMount() {
+    fetch("http://acnhapi.com/v1/villagers/")
+    .then((response) => response.json())
+    .then((data) => {
+      const villagers = Object.values(data);
+      this.setState({
+        villagers: villagers
+      })
+    });
   }
 
   handleChange = (e) => {
@@ -29,14 +32,13 @@ export default class App extends Component{
       search: e.target.value
     })
   }
-
+  
   render() {
-    return(
+    return (
       <div>
-        <input type="text" onChange={this.handleChange}/>
-        <DisplayCards villagers={this.state.villagers} />
+        <input type='text' onChange={this.handleChange} />
+        <DisplayCards villagers={this.dynamicSearch()} />
       </div>
     )
   }
 }
-

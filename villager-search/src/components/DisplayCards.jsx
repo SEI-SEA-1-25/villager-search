@@ -1,24 +1,14 @@
-import {Component} from 'react'
+import { Component } from 'react'
 
 export default class DisplayCards extends Component {
-    dynamicSearch = () => {
-        return this.state.villagers.filter((villager) =>
-          villager.name["name-USen"]
-            .toLowerCase()
-            .includes(this.state.search.toLowerCase())
-        );
-      };
-
-    render() {
-        return (
-            <div>
-                {this.props.villagers.map((villager, i) => (
-                <div key={i}>
-                    <img alt={villager.name["name-USen"]} src={villager["image_uri"]} />
-                    <p>{villager.name["name-USen"]}</p>
-                </div>
-            ))}
-            </div>
-        )
-    }
+  render() {
+    return (
+      this.props.villagers.map((villager, i) => (
+        <div key={i} id={'villager-' + i} className='villager-container'>
+          <p>{villager.name['name-USen']}</p>
+          <img src={villager.image_uri} alt={'photo of : ' + villager.name['name-USen']} />
+        </div>
+      ))
+    )
+  }
 }
