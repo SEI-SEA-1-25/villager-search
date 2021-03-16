@@ -35,7 +35,7 @@ export default class App extends Component {
   
   render() {
     return (
-      <div>
+      <div className="searchF">
         <input type='text' onChange={this.handleChange} />
         <DisplayCards villagers={this.dynamicSearch()} />
       </div>
